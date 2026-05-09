@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import authRoutes from "./routes/authRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js"
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ app.use(cors())
 
 app.use("/api/auth", authRoutes)
 app.use("/api/products",productRoutes)
+app.use("/api/order",orderRoutes)
 
 mongoose.connect(process.env.MONGO_URI).then(()=>{console.log("Mongo DB Connected")}).catch(err => console.log(err))
 
