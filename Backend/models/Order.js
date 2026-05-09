@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema({
         }
     ],
     totalPrice: { type: Number, required: true },
-    status: { type: String, required: true },
+    status: { type: String, required: true, default: "pending" },
     paymentStatus: { type: String, required: true, default: "pending" },
     createdAt: { type: Date, required: true, default: Date.now() }
 
