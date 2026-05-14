@@ -1,7 +1,6 @@
-import { createContext } from "react";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react"
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
 
@@ -13,19 +12,16 @@ export const AuthProvider = ({ children }) => {
         }
     })
 
-    const [token, setToken] = useState((localStorage.getItem('token')) || null)
+    const [token, setToken] = useState(localStorage.getItem('token') || null)
 
     function login(userData, token) {
-
-        setUser(userData);
+        setUser(userData)
         setToken(token)
         localStorage.setItem('user', JSON.stringify(userData))
         localStorage.setItem('token', token)
-
     }
 
     function logout() {
-
         setUser(null)
         setToken(null)
         localStorage.removeItem('user')
@@ -39,4 +35,5 @@ export const AuthProvider = ({ children }) => {
     )
 }
 
-export default AuthContext;
+export const useAuth = () => useContext(AuthContext)
+export default AuthContext
