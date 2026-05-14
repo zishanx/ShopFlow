@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import api from "../utils/api"
 
 
 export default function Login() {
@@ -25,7 +26,11 @@ export default function Login() {
         setError("")
 
         try {
-            await login(formData.email, formData.password)
+            const res = await api.post("/auth/login",{
+                email:formData.email,
+                password:formData.password
+            })
+            login(res.data.user, res.data.token)
             navigate("/")
         } catch (err) {
             setError(err.response?.data?.message || "Login failed")
