@@ -11,6 +11,7 @@ import Dashboard from './pages/admin/Dashboard.jsx'
 import ManageProducts from './pages/admin/ManageProducts.jsx'
 import ManageOrders from './pages/admin/ManageOrders.jsx'
 import Navbar from './components/Navbar.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 export default function App() {
   return (
@@ -26,12 +27,12 @@ export default function App() {
         <Route path='/products/:id' element={<ProductDetail />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/checkout' element={<Checkout />} />
-        <Route path='/my-orders' element={<MyOrders />} />
-        <Route path='/admin/dashboard' element={<Dashboard />} />
-        <Route path='/admin/products' element={<ManageProducts />} />
-        <Route path='/admin/orders' element={<ManageOrders />} />
+        <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+        <Route path='/checkout' element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+        <Route path='/my-orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+        <Route path='/admin/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='/admin/products' element={<ProtectedRoute><ManageProducts /></ProtectedRoute>} />
+        <Route path='/admin/orders' element={<ProtectedRoute><ManageOrders /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

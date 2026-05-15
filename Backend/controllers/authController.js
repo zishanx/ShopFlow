@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 
-export   const register = async (req, res) => {
+export const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
@@ -40,7 +40,14 @@ export const login = async (req, res) => {
         if (await bcrypt.compare(password, isUser.password)) {
             const token = jwt.sign({ userId: isUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
 
-            res.status(201).json({ token: token });
+            res.status(201).json({
+                token: token,
+                user: {
+                    id: isUser._id,
+                    name: isUser.name,
+                    email: isUser.email
+                }
+            });
         } else {
             res.status(400).json({ message: "Invalid credential" })
         }
