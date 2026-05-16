@@ -8,14 +8,14 @@ const protect = async (req, res, next) => {
             return res.status(401).json({ message: "No Token Available." })
         }
 
-        const decoded =  jwt.verify(token,process.env.JWT_SECRET,)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET,)
 
         req.user = decoded
 
         next()
 
     } catch (error) {
-res.status(400).json({error: error.message})
+        res.status(400).json({ error: error.message })
     }
 }
 
