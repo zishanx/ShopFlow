@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useCart } from "../context/CartContext.jsx"
 import api from "../utils/api.js"
 
 export default function ProductDetail() {
@@ -7,6 +8,7 @@ export default function ProductDetail() {
     const navigate = useNavigate()
     const [product, setProduct] = useState({})
     const [related, setRelated] = useState([])
+    const { addToCart } = useCart()
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -47,7 +49,18 @@ export default function ProductDetail() {
                     <p className={`text-sm ${product.stock > 0 ? 'text-[#666666]' : 'text-[#FF3D5A]'}`}>
                         {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
                     </p>
-                    <button className="mt-2 py-3 px-8 rounded-xl font-semibold text-white bg-[#FF3D5A] hover:bg-[#e0002a] transition-colors duration-200 w-fit">
+                    <button 
+                    className="mt-2 py-3 px-8 rounded-xl font-semibold text-white bg-[#FF3D5A] hover:bg-[#e0002a] transition-colors duration-200 w-fit"
+                    onClick={()=>{
+                        addToCart({
+                            product:product._id,
+                            name:product.name,
+                            image: product.image,
+                            price:product.price,
+                            quantity: 1
+                        })
+                    }}
+                    >
                         Add to Cart
                     </button>
                 </div>

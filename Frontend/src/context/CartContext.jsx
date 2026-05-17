@@ -10,29 +10,34 @@ export function CartProvider({ children }) {
     const { user } = useAuth()
 
     useEffect(() => {
+
         const getCart = async () => {
+            console.log(user)
+
             if (user) {
                 const res = await api.get('/cart');
-                setCart(res.data)
+                setCart(res.data.items)
             }
         }
         getCart()
     }, [user])
 
-    const addtoCart = async(data)=>{
-        const res = await api.post('/cart/add',data)
+    const addToCart = async (data) => {
+        const res = await api.post('/cart/add', data)
         setCart(res.data.items)
     }
 
-    const removeFromCart = async(product)=>{
-        await api.delete('/cart/remove', product)
+    const removeFromCart = async (product) => {
+        const res = await api.delete('/cart/remove', product)
+        setCart(res.data.items)
     }
 
-    const updateQuanitiy = async(product)=>{
-        await api.put('/cart/update',product)
+    const updateQuantity = async (product, quantity) => {
+        const res = await api.put('/cart/update', { product, quantity })
+        setCart(res.data.items)
     }
     return (
-        <CartContext.Provider value={{ cart, setCart, addtoCart,removeFromCart }}>{children}</CartContext.Provider>
+        <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart, updateQuantity }}>{children}</CartContext.Provider>
     )
 }
 export function useCart() {

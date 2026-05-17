@@ -5,7 +5,7 @@ export const getCart = async (req, res) => {
         const cart = await Cart.findOne({ user: req.user._id })
 
         if (!cart) {
-            return res.status(404).json({ message: "Cart not found" })
+            return res.status(200).json({ items: [] })
         }
 
         res.status(200).json(cart)
@@ -16,23 +16,32 @@ export const getCart = async (req, res) => {
 
 export const addToCart = async (req, res) => {
     try {
-        const { product, name, image, price, quantity } = req.body;
+        const { product, name, image, price, quantity } = req.body
+        console.log('1 - destructured')
 
-        let cart = await Cart.find({ user: req.user._id });
+        let cart = await Cart.findOne({ user: req.user._id })
+        console.log('2 - cart found', cart)
 
         if (!cart) {
             cart = new Cart({ user: req.user._id, items: [] })
+            console.log('3 - new cart created')
         }
+
         const existingItem = cart.items.find(item => item.product.toString() === product)
+        console.log('4 - existingItem', existingItem)
 
         if (existingItem) {
             existingItem.quantity += 1
         } else {
             cart.items.push({ product, name, image, price, quantity })
         }
+
         await cart.save()
+        console.log('5 - saved')
+
         res.status(200).json(cart)
     } catch (err) {
+        console.log('ERROR', err.message)
         res.status(400).json({ message: err.message })
     }
 }
@@ -52,10 +61,10 @@ export const removeFromCart = async (req, res) => {
 
 export const updateQuantity = async (req, res) => {
     try {
-        const { productId, quantity } = req.body;
+        const { product, quantity } = req.body;
         const cart = await Cart.findOne({ user: req.user._id });
 
-        const updatingItem = cart.items.find(item => item.product.toString() === productId);
+        const updatingItem = cart.items.find(item => item.product.toString() === product);
 
         updatingItem.quantity = quantity;
 
