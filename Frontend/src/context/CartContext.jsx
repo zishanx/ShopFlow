@@ -26,11 +26,11 @@ export function CartProvider({ children }) {
     const addToCart = async (data) => {
         const res = await api.post('/cart/add', data)
         setCart(res.data.items)
-        toast.sucess("Added to cart!")
+        toast.success("Added to cart!")
     }
 
     const removeFromCart = async (product) => {
-        const res = await api.delete('/cart/remove', product)
+        const res = await api.delete('/cart/remove', { data: { productId: product } })
         setCart(res.data.items)
     }
 
