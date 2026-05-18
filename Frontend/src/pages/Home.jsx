@@ -55,7 +55,7 @@ export default function Home() {
 
                 <div className="cards flex gap-5">
                     {products.map(product => (
-                        <Link to={`/products/${product._id}`} key={product._id}>
+                        <Link to={`/products/${product._id}`} key={product._id} className="flex-1">
                             <div className="card rounded-md bg-[#f9f9f9]">
                                 <img src={product.image} alt={product.name} className="rounded-md w-full h-[200px] object-cover" />
                                 <div className="desc p-4">
