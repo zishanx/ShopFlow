@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
+import adminRoutes from "./routes/adminRoute.js"
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/products",productRoutes)
 app.use("/api/order",orderRoutes)
 app.use("/api/cart",cartRoutes)
+app.use("/api/admin",adminRoutes)
 
 mongoose.connect(process.env.MONGO_URI).then(()=>{console.log("Mongo DB Connected")}).catch(err => console.log(err))
 

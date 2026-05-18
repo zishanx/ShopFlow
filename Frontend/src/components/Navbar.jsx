@@ -13,19 +13,25 @@ export default function Navbar() {
 
     return (
         <nav className="bg-white border-b border-gray-200 h-16 px-10 flex items-center justify-between font-sans">
-            
+
             <Link to='/' className="text-2xl font-bold tracking-tight text-gray-900" style={{ fontFamily: 'Syne, sans-serif' }}>
                 Shop<span className="text-[#FF3D5A]">Flow</span>
             </Link>
 
             <ul className="flex gap-8 list-none m-0 p-0">
                 <li><Link to='/' className="text-[15px] font-medium text-gray-500 hover:text-[#FF3D5A] transition-colors">Home</Link></li>
+                <li>{user && user.role !== "admin" && (
+                    <Link to='/my-orders' className="text-[15px] font-medium text-gray-500 hover:text-[#FF3D5A] transition-colors">
+                        My Orders
+                    </Link>
+                )}</li>
                 <li><Link to='/products' className="text-[15px] font-medium text-gray-500 hover:text-[#FF3D5A] transition-colors">Products</Link></li>
             </ul>
 
             <div className="flex items-center gap-4">
                 {user ? (
                     <>
+
                         <Link to='/cart' className="text-gray-800 hover:text-[#FF3D5A] transition-colors">
                             🛒
                         </Link>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
 
 const Checkout = () => {
     const { cart, setCart } = useCart();
@@ -26,11 +27,21 @@ const Checkout = () => {
     const shipping = subtotal > 999 ? 0 : 99;
     const total = subtotal + shipping;
 
-    const handlePlaceOrder = (e) => {
+    const handlePlaceOrder = async (e) => {
         e.preventDefault();
-        // Razorpay will go here later
-        console.log("Order placed:", { form, cart });
-        setCart([])
+        try{
+            await api.post("order/create", {
+                items: cart.map((item)=>({product: item.product,
+                    quantity: item.quantity,
+                    price: item.price,
+                })),
+                totalPrice: total,
+            });
+            setCart([])
+            navigate("/my-orders");
+        }catch(err){
+            console.log(err)
+        }
     };
 
     return (

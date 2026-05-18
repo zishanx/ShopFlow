@@ -12,6 +12,7 @@ import ManageProducts from './pages/admin/ManageProducts.jsx'
 import ManageOrders from './pages/admin/ManageOrders.jsx'
 import Navbar from './components/Navbar.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import AdminRoute from './components/AdminRoute.jsx'
 
 
 export default function App() {
@@ -31,9 +32,9 @@ export default function App() {
         <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path='/checkout' element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
         <Route path='/my-orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
-        <Route path='/admin/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path='/admin/products' element={<ProtectedRoute><ManageProducts /></ProtectedRoute>} />
-        <Route path='/admin/orders' element={<ProtectedRoute><ManageOrders /></ProtectedRoute>} />
+        <Route path='/admin/dashboard' element={<ProtectedRoute><AdminRoute><Dashboard /></AdminRoute></ProtectedRoute>} />
+        <Route path='/admin/products' element={<ProtectedRoute><AdminRoute><ManageProducts /></AdminRoute></ProtectedRoute>} />
+        <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><ManageOrders /></AdminRoute></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

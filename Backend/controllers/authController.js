@@ -45,7 +45,8 @@ export const login = async (req, res) => {
                 user: {
                     id: isUser._id,
                     name: isUser.name,
-                    email: isUser.email
+                    email: isUser.email,
+                    role: isUser.role
                 }
             });
         } else {
