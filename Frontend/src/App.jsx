@@ -20,7 +20,7 @@ import { Toaster } from 'react-hot-toast'
 export default function App() {
   return (
     <BrowserRouter>
-      <Toaster>
+      <Toaster />
         <Navbar></Navbar>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -35,7 +35,6 @@ export default function App() {
           <Route path='/admin/products' element={<ProtectedRoute><AdminRoute><ManageProducts /></AdminRoute></ProtectedRoute>} />
           <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><ManageOrders /></AdminRoute></ProtectedRoute>} />
         </Routes>
-      </Toaster>
     </BrowserRouter>
   )
 }
