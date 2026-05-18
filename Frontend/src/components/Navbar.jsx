@@ -20,7 +20,7 @@ export default function Navbar() {
 
             <ul className="flex gap-8 list-none m-0 p-0">
                 <li><Link to='/' className="text-[15px] font-medium text-gray-500 hover:text-[#FF3D5A] transition-colors">Home</Link></li>
-                <li>{user && user.role !== "admin" && (
+                <li>{user && (
                     <Link to='/my-orders' className="text-[15px] font-medium text-gray-500 hover:text-[#FF3D5A] transition-colors">
                         My Orders
                     </Link>

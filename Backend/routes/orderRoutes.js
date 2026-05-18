@@ -1,6 +1,5 @@
 import express from 'express'
 import protect from '../middleware/authMiddleware.js'
-import { createOrder, getAllOrders, getMyOrders, updateOrderStatus } from '../controllers/orderController.js'
 import { createOrder, getAllOrders, getMyOrders, updateOrderStatus, createRazorpayOrder,verifyPayment } from '../controllers/orderController.js'
 import admin from '../middleware/adminMiddleware.js'
 

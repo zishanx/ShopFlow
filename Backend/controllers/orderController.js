@@ -44,13 +44,17 @@ export const updateOrderStatus = async (req, res) => {
 }
 
 
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
-})
+
 
 export const createRazorpayOrder = async (req, res) => {
     try {
+
+        const razorpay = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECRET
+        })
+
+
         const { amount } = req.body
         const order = await razorpay.orders.create({
             amount: amount * 100,
@@ -65,6 +69,13 @@ export const createRazorpayOrder = async (req, res) => {
 
 export const verifyPayment = async (req, res) => {
     try {
+
+        const razorpay = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECRET
+        })
+
+
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature, items, totalPrice } = req.body
 
         const body = razorpay_order_id + "|" + razorpay_payment_id

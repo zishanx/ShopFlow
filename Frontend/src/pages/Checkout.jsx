@@ -29,18 +29,61 @@ const Checkout = () => {
 
     const handlePlaceOrder = async (e) => {
         e.preventDefault();
-        try{
-            await api.post("order/create", {
-                items: cart.map((item)=>({product: item.product,
-                    quantity: item.quantity,
-                    price: item.price,
-                })),
-                totalPrice: total,
+
+        try {
+            // Step 1 — create Razorpay order on backend
+            const { data } = await api.post("/order/razorpay/create", {
+                amount: total
             });
-            setCart([])
-            navigate("/my-orders");
-        }catch(err){
-            console.log(err)
+
+            // Step 2 — open Razorpay popup
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: data.amount,
+                currency: "INR",
+                name: "ShopFlow",
+                description: "Order Payment",
+                order_id: data.id,
+
+                // Step 3 — this runs after successful payment
+                handler: async function (response) {
+                    try {
+                        await api.post("/order/razorpay/verify", {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            items: cart.map((item) => ({
+                                product: item.product,
+                                quantity: item.quantity,
+                                price: item.price,
+                            })),
+                            totalPrice: total,
+                        });
+
+                        // payment verified, order saved
+                        setCart([]);
+                        navigate("/my-orders");
+                    } catch (err) {
+                        console.error("Verification failed", err);
+                    }
+                },
+
+                prefill: {
+                    name: form.name,
+                    email: form.email,
+                    contact: form.phone,
+                },
+
+                theme: {
+                    color: "#FF3D5A",
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+
+        } catch (err) {
+            console.error(err);
         }
     };
 
