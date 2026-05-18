@@ -13,6 +13,7 @@ import ManageOrders from './pages/admin/ManageOrders.jsx'
 import Navbar from './components/Navbar.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
+
 export default function App() {
   return (
     <BrowserRouter>
