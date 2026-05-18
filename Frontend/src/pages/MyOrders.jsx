@@ -28,7 +28,7 @@ export default function MyOrders() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-black text-white px-6 py-12">
+        <div className="min-h-screen bg-black overflow-y-auto text-white px-6 py-12">
             <h1 className="text-3xl mb-2">My Orders</h1>
             <p className="text-gray-400 text-sm mb-10">
                 Track all your ShopFlow orders here.

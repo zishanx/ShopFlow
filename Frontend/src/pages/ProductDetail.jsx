@@ -19,6 +19,7 @@ export default function ProductDetail() {
             const filtered = all.data.filter(p => p.category === res.data.category && p._id !== id)
             setRelated(filtered)
         }
+        window.scrollTo(0,0)
         fetchProduct()
     }, [id])
 
