@@ -15,27 +15,26 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
 
 
+
 export default function App() {
   return (
     <BrowserRouter>
-
-      <Navbar></Navbar>
-
-
-
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/products/:id' element={<ProductDetail />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-        <Route path='/checkout' element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-        <Route path='/my-orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
-        <Route path='/admin/dashboard' element={<ProtectedRoute><AdminRoute><Dashboard /></AdminRoute></ProtectedRoute>} />
-        <Route path='/admin/products' element={<ProtectedRoute><AdminRoute><ManageProducts /></AdminRoute></ProtectedRoute>} />
-        <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><ManageOrders /></AdminRoute></ProtectedRoute>} />
-      </Routes>
+      <Toaster>
+        <Navbar></Navbar>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/products/:id' element={<ProductDetail />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+          <Route path='/checkout' element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+          <Route path='/my-orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+          <Route path='/admin/dashboard' element={<ProtectedRoute><AdminRoute><Dashboard /></AdminRoute></ProtectedRoute>} />
+          <Route path='/admin/products' element={<ProtectedRoute><AdminRoute><ManageProducts /></AdminRoute></ProtectedRoute>} />
+          <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><ManageOrders /></AdminRoute></ProtectedRoute>} />
+        </Routes>
+      </Toaster>
     </BrowserRouter>
   )
 }

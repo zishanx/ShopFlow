@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useAuth } from "./AuthContext";
 import api from "../utils/api.js"
+import toast from 'react-hot-toast'
 
 const CartContext = createContext()
 
@@ -25,6 +26,7 @@ export function CartProvider({ children }) {
     const addToCart = async (data) => {
         const res = await api.post('/cart/add', data)
         setCart(res.data.items)
+        toast.sucess("Added to cart!")
     }
 
     const removeFromCart = async (product) => {

@@ -47,17 +47,19 @@ export default function Home() {
 
                 <div className="cards flex flex-cols gap-5">
                     {products.map(product => (
-                        <div key={product.id} className="card rounded-md bg-[#f9f9f9]" >
-                            <img src={product.img} alt={product.name} className="rounded-md" />
-                            <div className="desc p-4">
-                                <h3>{product.name}</h3>
-                                <p className="text-[#666666]">{product.category}</p>
-                                <div className="flex gap-5 items-center">
-                                    <p className="font-bold">${product.price}</p>
-                                    <button className="bg-[#fff0f2] p-3 rounded-md hover:bg-[#FF3D5A] hover:font-bold hover:text-white">Add to Cart</button>
+                        <Link to="/products" key={product.id}>
+                            <div className="card rounded-md bg-[#f9f9f9]" >
+                                <img src={product.img} alt={product.name} className="rounded-md" />
+                                <div className="desc p-4">
+                                    <h3>{product.name}</h3>
+                                    <p className="text-[#666666]">{product.category}</p>
+                                    <div className="flex gap-5 items-center">
+                                        <p className="font-bold">${product.price}</p>
+                                        <button className="bg-[#fff0f2] p-3 rounded-md hover:bg-[#FF3D5A] hover:font-bold hover:text-white">Add to Cart</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
 
                 </div>
