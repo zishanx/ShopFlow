@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import api from "../utils/api"
+import { useNavigate } from "react-router-dom"
 
 export default function Home() {
     const [products, setProducts] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -29,7 +30,9 @@ export default function Home() {
                             <button className="bg-[#FF3D5A] text-white p-3 rounded-xl hover:bg-[#e0002a]">Shop now</button>
                         </Link>
                         <Link to="/products">
-                            <button className="bg-[#fff0f2] border border-[#e0e0e0] text-[#0a0a0a] p-3 rounded-xl">Browse Categories</button>
+                            <button className="bg-[#fff0f2] border border-[#e0e0e0] text-[#0a0a0a] p-3 rounded-xl"
+                            onClick={()=>navigate('/products')}
+                            >Browse Categories</button>
                         </Link>
                     </div>
                 </div>

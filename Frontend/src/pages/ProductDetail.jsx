@@ -19,7 +19,7 @@ export default function ProductDetail() {
             const filtered = all.data.filter(p => p.category === res.data.category && p._id !== id)
             setRelated(filtered)
         }
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         fetchProduct()
     }, [id])
 
@@ -50,17 +50,17 @@ export default function ProductDetail() {
                     <p className={`text-sm ${product.stock > 0 ? 'text-[#666666]' : 'text-[#FF3D5A]'}`}>
                         {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
                     </p>
-                    <button 
-                    className="mt-2 py-3 px-8 rounded-xl font-semibold text-white bg-[#FF3D5A] hover:bg-[#e0002a] transition-colors duration-200 w-fit"
-                    onClick={()=>{
-                        addToCart({
-                            product:product._id,
-                            name:product.name,
-                            image: product.image,
-                            price:product.price,
-                            quantity: 1
-                        })
-                    }}
+                    <button
+                        className="mt-2 py-3 px-8 rounded-xl font-semibold text-white bg-[#FF3D5A] hover:bg-[#e0002a] transition-colors duration-200 w-fit"
+                        onClick={() => {
+                            addToCart({
+                                product: product._id,
+                                name: product.name,
+                                image: product.image,
+                                price: product.price,
+                                quantity: 1
+                            })
+                        }}
                     >
                         Add to Cart
                     </button>
