@@ -14,6 +14,7 @@ import Navbar from './components/Navbar.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
 import { Toaster } from 'react-hot-toast'
+import Footer from './components/footer.jsx'
 
 
 
@@ -35,6 +36,7 @@ export default function App() {
           <Route path='/admin/products' element={<ProtectedRoute><AdminRoute><ManageProducts /></AdminRoute></ProtectedRoute>} />
           <Route path='/admin/orders' element={<ProtectedRoute><AdminRoute><ManageOrders /></AdminRoute></ProtectedRoute>} />
         </Routes>
+        <Footer></Footer>
     </BrowserRouter>
   )
 }
